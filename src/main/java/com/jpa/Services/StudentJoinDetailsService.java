@@ -8,7 +8,7 @@ import jakarta.persistence.Persistence;
 public class StudentJoinDetailsService {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("mssqlserver");
     InputReader ir = new InputReader();
-   
+
     StudentJoinDetsiailsDAO sjdd = new StudentJoinDetsiailsDAO();
 
     public void saveStudentJoinDetails() {
@@ -22,9 +22,9 @@ public class StudentJoinDetailsService {
         sjdd.getTheStudentDetailsById(ir.getStudentById());
     }
 
-    public void getAllStudents(){
+    public void getAllStudents() {
 
-       sjdd.getAllStudentDetails();
+        sjdd.getAllStudentDetails();
     }
 
 }
