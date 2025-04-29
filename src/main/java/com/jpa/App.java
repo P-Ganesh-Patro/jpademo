@@ -1,6 +1,7 @@
 package com.jpa;
 
-import com.jpa.Services.ProgrammerDeptService;
+import com.jpa.Services.PassportService;
+import com.jpa.Services.PersonService;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -10,18 +11,15 @@ import jakarta.persistence.Persistence;
 public class App {
     public static void main(String[] args) {
         EntityTransaction et = null;
-
         try (EntityManagerFactory emf = Persistence.createEntityManagerFactory("mssqlserver");
                 EntityManager em = emf.createEntityManager()) {
-
+            PassportService pps = new PassportService();
+            PersonService ps = new PersonService();
             et = em.getTransaction();
             et.begin();
-
-            ProgrammerDeptService pds = new ProgrammerDeptService();
-            pds.saveProgammersList();
-
+            pps.persistThePassport(em);
+            ps.persistThePerson(em);
             et.commit();
-
         } catch (Exception e) {
             if (et != null && et.isActive()) {
                 et.rollback();
