@@ -7,6 +7,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class CafePanachaDao {
+
+    
     public void persistCafePancha(PanchaCafeModel pcm) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("mssqlserver");
 

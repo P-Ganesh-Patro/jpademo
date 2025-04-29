@@ -8,9 +8,16 @@ import java.util.Scanner;
 import java.util.Set;
 
 import com.jpa.Model.StudentJoinDetailsModel;
+import com.jpa.Model.PassportEntity;
+import com.jpa.Model.PersonEntity;
+// import com.jpa.Model.Passport;
 import com.jpa.Model.ProgrammerDeptModel;
 
 public class InputReader {
+
+    private static final Scanner in = new Scanner(System.in);
+    // InputReader ir = new InputReader();
+
     public StudentJoinDetailsModel readStudentJoinDetails() {
         try (Scanner in = new Scanner(System.in);) {
             System.out.println("Enter The Student details:-");
@@ -73,6 +80,48 @@ public class InputReader {
 
         }
 
+    }
+
+    public PassportEntity createPassport() {
+        try {
+
+            System.out.println("Enter the passport Number:- ");
+            String passPortNum = in.nextLine();
+            // PassportEntity pp = new PassportEntity(passPortNum);
+            // in.nextLine();
+            boolean passportMatch = passPortNum.matches("^[A-Z][0-9]{7}");
+            if (passportMatch) {
+
+                return new PassportEntity(passPortNum);
+            } else {
+                System.out.println("Invalid passport number...");
+                return null;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error:- " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public PersonEntity createPerson() {
+        try {
+            System.out.println("Enter The Person Name:- ");
+            String name = in.nextLine();
+            in.nextLine();
+            System.out.println("Enter the id:-");
+            Long id = in.nextLong();
+            PersonEntity pe = new PersonEntity(id, name, createPassport());
+            // in.close();
+            return pe;
+
+        } catch (Exception e) {
+            System.out.println("Error:- " + e.getMessage());
+            e.printStackTrace();
+            return null;
+
+        }
     }
 
 }
